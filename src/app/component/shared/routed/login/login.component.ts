@@ -1,8 +1,7 @@
-import { IProducto } from './../../../../model/producto-interface';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { AjaxService } from 'src/app/service/ajax.service.service';
+import { AuthService } from 'src/app/service/auth.service';
+import { AuthResponse } from 'src/app/model/AuthResponse.interface';
 
 @Component({
   templateUrl: './login.component.html',
@@ -11,41 +10,33 @@ import { AjaxService } from 'src/app/service/ajax.service.service';
 
 export class LoginComponent implements OnInit {
 
-  id: number = 0;
-  oProduct: IProducto | null = null;
-
-  constructor(
-    private oActivatedRoute: ActivatedRoute,
-    private oHttpClient: HttpClient,
-    private oAjaxService: AjaxService
-  ) {
-    this.id = oActivatedRoute.snapshot.params['id'];
-  }
+  username: string = '';
+  password: string = ''
+  userSession!: AuthResponse;
+ 
+  constructor( private AuthService: AuthService  ) { }
 
   ngOnInit(): void {
-    this.showProduct2();
+
   }
 
-  showProduct() {
-    this.oHttpClient.get<IProducto>("http://localhost:8082/producto/" + this.id)
-      .subscribe((data: IProducto) => {
-        console.log(data);
-        this.oProduct = data;
-      }, (error: HttpErrorResponse) => {
-        console.log(error.status, error.statusText);
-      })
-  }
-
-  showProduct2() {
-    this.oAjaxService.getOne(this.id)
-      .subscribe((data: IProducto) => {
-        console.log(data);
-        this.oProduct = data;
-      }, (error: HttpErrorResponse) => {
-        console.log(error.status, error.statusText);
-      })
+  login( e:MouseEvent ){
+    e.preventDefault();
+    this.AuthService.login(this.username,this.password)
+    .subscribe({
+      next: (resp: AuthResponse) =>{
+        this.userSession = resp;
+        this.AuthService.sessionStatus.next(this.userSession);
+      },
+      error: (err: HttpErrorResponse) =>{
+        console.log(err);
+      }
+    });
+    this.username='';
+    this.password='';
 
   }
 
 
-}
+  }
+
