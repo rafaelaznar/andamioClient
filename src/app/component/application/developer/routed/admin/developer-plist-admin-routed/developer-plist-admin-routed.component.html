@@ -2,6 +2,14 @@
   <div class="row">
     <div class="col">
       <h1 class="text-center mb-5">Lista de Developers</h1>
+      <div class="row mb-4">
+        <div class="col d-flex justify-content-center">
+          <button routerLink="/admin/developer/create" class="btn btn-success">
+            <fa-icon [icon]="faUserPlus"></fa-icon>
+            Agregar nuevo
+          </button>
+        </div>
+      </div>
       <div class="col-md text-end d-flex justify-content-center align-items-center mb-3">
         <app-search-unrouted [placeHolder]="'Buscar developer'" (onSearch)="setFilter( $event )"></app-search-unrouted>
         <app-dropdown-register-page class="mx-2" [PageSize]="responseFromServer.numberOfElements"

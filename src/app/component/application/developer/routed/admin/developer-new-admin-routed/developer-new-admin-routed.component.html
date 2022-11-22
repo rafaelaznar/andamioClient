@@ -1,0 +1,173 @@
+<div class="container mt-5">
+    <div class="row">
+        <div class="col">
+            <h1 class="text-center mb-5">Nuevo Developer</h1>
+
+            <form
+                class="mx-auto w-50"
+                autocomplete="off"
+                [formGroup]="newDeveloperForm"
+            >
+                <div class="mb-3 row">
+                    <label class="col-sm-3 col-form-label">Name</label>
+                    <div class="col-sm-9">
+                        <input
+                            type="text"
+                            class="form-control"
+                            formControlName="name"
+                        />
+
+                        <span
+                            *ngIf="invalidInput('name')"
+                            class="form-text text-danger"
+                        >
+                            No puede estar vacio
+                        </span>
+                    </div>
+                </div>
+
+                <div class="mb-3 row">
+                    <label class="col-sm-3 col-form-label">Surname</label>
+                    <div class="col-sm-9">
+                        <input
+                            type="text"
+                            class="form-control"
+                            formControlName="surname"
+                        />
+                        <span
+                            *ngIf="invalidInput('surname')"
+                            class="form-text text-danger"
+                        >
+                            No puede estar vacio
+                        </span>
+                    </div>
+                </div>
+
+                <div class="mb-3 row">
+                    <label class="col-sm-3 col-form-label">Last Name</label>
+                    <div class="col-sm-9">
+                        <input
+                            type="text"
+                            class="form-control"
+                            formControlName="lastname"
+                        />
+
+                        <span
+                            *ngIf="invalidInput('lastname')"
+                            class="form-text text-danger"
+                        >
+                            No puede estar vacio
+                        </span>
+                    </div>
+                </div>
+
+                <div class="mb-3 row">
+                    <label class="col-sm-3 col-form-label">Username</label>
+                    <div class="col-sm-9">
+                        <input
+                            type="text"
+                            class="form-control"
+                            formControlName="username"
+                        />
+
+                        <span
+                            *ngIf="invalidInput('username')"
+                            class="form-text text-danger"
+                        >
+                            No puede estar vacio
+                        </span>
+                    </div>
+                </div>
+
+                <div class="mb-3 row">
+                    <label class="col-sm-3 col-form-label">Password</label>
+                    <div class="col-sm-9">
+                        <input
+                            type="password"
+                            class="form-control"
+                            formControlName="password"
+                        />
+
+                        <span
+                            *ngIf="invalidInput('password')"
+                            class="form-text text-danger"
+                        >
+                            No puede estar vacio
+                        </span>
+                    </div>
+                </div>
+
+                <div class="mb-3 row">
+                    <label class="col-sm-3 col-form-label">Email</label>
+                    <div class="col-sm-9">
+                        <input
+                            type="email"
+                            class="form-control"
+                            formControlName="email"
+                        />
+
+                        <span
+                            *ngIf="invalidInput('email')"
+                            class="form-text text-danger"
+                        >
+                            Email no válido
+                        </span>
+                    </div>
+                </div>
+
+                <div class="mb-3 row">
+                    <label class="col-sm-3 col-form-label">Team</label>
+                    <div class="col-sm-9">
+                        <select class="form-control" formControlName="team">
+                            <option
+                                [value]="team.id"
+                                *ngFor="let team of this.teamList"
+                            >
+                                {{ team.name }}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="mb-3 row">
+                    <label class="col-sm-3 col-form-label">Usertype</label>
+                    <div class="col-sm-9">
+                        <select class="form-control" formControlName="usertype">
+                            <option
+                                [value]="usertype.id"
+                                *ngFor="let usertype of this.usertypeList"
+                            >
+                                {{ usertype.name }}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row text-center">
+                    <div class="col">
+                        <button class="btn btn-primary" (click)="setForm()">
+                            Guardar
+                        </button>
+
+                        <button
+                            type="reset"
+                            class="btn btn-danger mx-2"
+                            (click)="this.resetForm()"
+                        >
+                            Resetear
+                        </button>
+                    </div>
+                </div>
+            </form>
+
+            <div *ngIf="this.response != 0" class="alert alert-success mt-3" role="alert">
+                Developer creado con éxito
+            </div>
+
+            <div *ngIf="this.error" class="alert alert-danger mt-3" role="alert">
+                Error al crear developer
+            </div>
+
+        </div>
+    </div>
+</div>

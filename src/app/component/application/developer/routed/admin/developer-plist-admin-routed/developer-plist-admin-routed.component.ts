@@ -2,7 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { IDeveloper } from 'src/app/model/developer-interface';
 import { DeveloperService } from 'src/app/service/developer.service';
-import { faEye, faUserPen, faTrash, faArrowUp, faArrowDown } from '@fortawesome/free-solid-svg-icons';
+import { faEye, faUserPen, faTrash, faArrowUp, faArrowDown, faUserPlus } from '@fortawesome/free-solid-svg-icons';
 import { IPage } from 'src/app/model/generic-types-interface';
 
 @Component({
@@ -27,6 +27,7 @@ export class DeveloperPlistAdminRoutedComponent implements OnInit {
   faTrash = faTrash;
   faArrowUp = faArrowUp;
   faArrowDown = faArrowDown;
+  faUserPlus = faUserPlus;
 
   constructor(
     private oDeveloperService: DeveloperService

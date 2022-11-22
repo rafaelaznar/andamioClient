@@ -43,4 +43,9 @@ export class DeveloperService {
     return this.oHttp.delete<number>(this.url + '/' + id);
   }
 
+  setNewDeveloper( newDeveloper: IDeveloper ): Observable<number>{
+    const body = JSON.stringify(newDeveloper);
+    return this.oHttp.post<number>(this.url+'/',body, {headers: environment.headers});
+  }
+
 }
